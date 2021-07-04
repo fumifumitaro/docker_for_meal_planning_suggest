@@ -2,24 +2,43 @@ version: "3.8"
 volumes:
   mysql:
   vendor:
+  node_modules:
+
 services:
   nginx:
     build: ./docker/nginx
     ports:
-      - 8080:80
+      - 80:80
     volumes:
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
-      - ./src:/var/www/html
+      - ./src:/work
     depends_on:
       - php
+
+  node:
+    build: ./docker/node
+    volumes:
+      - ./src:/work
+      - node_modules:/work/node_modules
+    working_dir: /work
+    tty: true
+
+  composer:
+    build: ./docker/composer
+    volumes:
+      - ./src:/work
+      - vendor:/work/vendor
+    working_dir: /work
 
   php:
     build: ./docker/php
     volumes:
-      - ./src:/var/www/html
-      - vendor:/var/www/html/vendor
+      - ./src:/work
+      - vendor:/work/vendor
+      - node_modules:/work/node_modules
     depends_on:
       - mysql
+    working_dir: /work
 
   mysql:
     build: ./docker/mysql
@@ -29,6 +48,11 @@ services:
       - 3306:3306
     environment:
       MYSQL_DATABASE: laravel
-      MYSQL_USER: root
+      MYSQL_USER: user
       MYSQL_PASSWORD: pass
       MYSQL_ROOT_PASSWORD: pass
+
+  mail:
+    image: mailhog/mailhog
+    ports:
+      - 8025:8025
