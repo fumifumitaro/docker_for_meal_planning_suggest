@@ -3,6 +3,7 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/laravel" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/meal_planning_suggest" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/src" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/src/laravel" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/src/src" vcs="Git" />
