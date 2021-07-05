@@ -1,5 +1,5 @@
 # docker_for_meal_planning_suggest
-朝食おススメ用アプリのDocker環境
+料理の献立おススメ用アプリのDocker環境
 
 必須要件 \
 docker
